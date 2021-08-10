@@ -1,10 +1,12 @@
-package com.project.Astron.Service;
+package com.project.astron.service;
 
 import java.util.List;
 
-import com.project.Astron.Model.User;
+import com.project.astron.model.User;
 
 
 public interface IUserService {
 	List < User > findAll();
+
+
 }

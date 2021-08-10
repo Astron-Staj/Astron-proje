@@ -1,4 +1,4 @@
-package com.project.Astron;
+package com.project.astron;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.project.Astron.Service","com.project.Astron.Controller"})
-@EntityScan("com.project.Astron.Model")
+@ComponentScan({"com.project.astron.service","com.project.astron.controller","com.project.astron"})
+@EntityScan("com.project.astron.model")
 public class AstronApplication {
 
 	public static void main(String[] args) {
