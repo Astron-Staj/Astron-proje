@@ -11,33 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.astron.model.User;
+import com.project.astron.service.IUserService;
 import com.project.astron.service.UserServiceImpl;
 
 
 
-@Controller
+@RestController
+@RequestMapping("user")
 public class UserController {
 
 	
 	@Autowired
-	UserServiceImpl userService;
+	IUserService userService;
 	
-	@GetMapping("/login")
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "login";
-    }
 	
-	@GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
-        return "welcome";
-    }
-	
+	@GetMapping("all")
+	public List<User> getAll() {
+		return userService.findAll();
+	}
 	
 	
 }

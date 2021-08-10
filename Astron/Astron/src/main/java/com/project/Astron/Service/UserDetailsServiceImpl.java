@@ -14,26 +14,30 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.astron.model.Authority;
+import com.project.astron.model.Credential;
+import com.project.astron.model.Template;
 import com.project.astron.model.User;
-import com.project.astron.repository.UserDataRepository;
+
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
     @Autowired
-    private CredentialServiceImpl credentialServiceImpl;
+    private ICredentialService credentialService;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails  loadUserByUsername(String username) {
-        User user = credentialServiceImpl.findByUsername(username).getUser();
+    	Credential cre = credentialService.findByUsername(username);
+    	User user=cre.getUser();
         if (user == null) throw new UsernameNotFoundException(username);
-
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-       // for (Role role : user.getRoles()){
-            grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-        //}
-
-        return new org.springframework.security.core.userdetails.User(user.getUserCredential().getUsername(), user.getUserCredential().getPassword(), grantedAuthorities);
+        for (Template template : user.getTemplates()){
+        	for(Authority auth: template.getAuths())
+            grantedAuthorities.add(new SimpleGrantedAuthority(auth.getName()));
+        }
+            
+        return new org.springframework.security.core.userdetails.User(cre.getUsername(), cre.getPassword(), grantedAuthorities);
     }
 }

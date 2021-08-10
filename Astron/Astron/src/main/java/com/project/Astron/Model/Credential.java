@@ -14,9 +14,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "credential", schema = "public")
 public class Credential {
-	@Id 
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
 	public int id;
 	
 	@Column(name="username")
@@ -28,16 +27,15 @@ public class Credential {
 	@Column(name="user_id",nullable = false)
 	public int userId;
 	
-		@OneToOne(fetch = FetchType.LAZY, optional = false)
-	    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", insertable=false, updatable=false)
-	    private User user;
-	
-	
-		public Credential() {
-		}
 	
 
-	public Credential( String username, String password, int userId, User user) {
+	@OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", insertable=false, updatable=false)
+	User user;
+
+
+	public Credential(String username, String password, int userId, User user) {
+		
 		this.username = username;
 		this.password = password;
 		this.userId = userId;
@@ -45,49 +43,66 @@ public class Credential {
 	}
 
 
+	public Credential() {
+		super();
+	}
 
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	public String getUsername() {
 		return username;
 	}
 
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 
 	public String getPassword() {
 		return password;
 	}
 
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 	public int getUserId() {
 		return userId;
 	}
 
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
+
 	public User getUser() {
 		return user;
 	}
+
 
 	public void setUser(User user) {
 		this.user = user;
 	}
 
 
+	@Override
+	public String toString() {
+		return "Credential [id=" + id + ", username=" + username + ", password=" + password + ", userId=" + userId
+				+ ", user=" + user + "]";
+	}
 
 
 	@Override
@@ -101,8 +116,6 @@ public class Credential {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
-
-
 
 
 	@Override
@@ -135,9 +148,12 @@ public class Credential {
 			return false;
 		return true;
 	}
-
-
 	
+	
+	
+		
+
+		
 	
 	
 	

@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.AntPathMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -26,15 +27,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/cre/**","/template/**","/authority/**").hasAuthority("SUPERADMIN")
+        		.antMatchers("/user/**").hasAnyAuthority("SUPERADMIN","ADMIN")
                 .anyRequest().authenticated()
                 .and()
-            .formLogin().loginPage("/login")	
+                .formLogin().loginPage("/login")	
                 .permitAll()
                 .and()
-            .logout()
+                .logout()
                 .permitAll();
     }
     

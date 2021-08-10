@@ -1,6 +1,8 @@
 package com.project.astron.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,18 +11,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.jdbc.datasource.UserCredentialsDataSourceAdapter;
 
 @Entity
 @Table(name = "user", schema = "public")
 public class User {
 	
-	@Id 
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
 	public long id;
 	
 	@Column(name="email")
@@ -50,23 +56,22 @@ public class User {
 	@Column(name="updater")
 	public long updater;
 	
-	@OneToOne(mappedBy="user",fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL)
-    private Credential userCredential;
 	
+	@ManyToMany(cascade = CascadeType.ALL) @Fetch(value = FetchMode.SELECT)
+    @JoinTable(name = "user_template_relation", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
+    inverseJoinColumns = @JoinColumn(name = "template_id", referencedColumnName = "id"))
+    private Set<Template> templates=new HashSet<Template>();
 	
 	
 	
 	public User() {
 	}
 
-	
 
 
-
-	public User(String email, String firstName, String lastName, boolean state, Date lastLogin, Date created,
-			Date updated, long creator, long updater, Credential userCredential) {
-		super();
+	public User( String email, String firstName, String lastName, boolean state, Date lastLogin, Date created,
+			Date updated, long creator, long updater, Set<Template> templates) {
+		
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -76,10 +81,8 @@ public class User {
 		this.updated = updated;
 		this.creator = creator;
 		this.updater = updater;
-		this.userCredential = userCredential;
+		this.templates = templates;
 	}
-
-
 
 
 
@@ -89,11 +92,9 @@ public class User {
 
 
 
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 
 
@@ -103,11 +104,9 @@ public class User {
 
 
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 
 
@@ -117,11 +116,9 @@ public class User {
 
 
 
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 
 
 
@@ -131,11 +128,9 @@ public class User {
 
 
 
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 
 
 
@@ -145,11 +140,9 @@ public class User {
 
 
 
-
 	public void setState(boolean state) {
 		this.state = state;
 	}
-
 
 
 
@@ -159,11 +152,9 @@ public class User {
 
 
 
-
 	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
 	}
-
 
 
 
@@ -173,11 +164,9 @@ public class User {
 
 
 
-
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-
 
 
 
@@ -187,11 +176,9 @@ public class User {
 
 
 
-
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-
 
 
 
@@ -201,11 +188,9 @@ public class User {
 
 
 
-
 	public void setCreator(long creator) {
 		this.creator = creator;
 	}
-
 
 
 
@@ -215,26 +200,21 @@ public class User {
 
 
 
-
 	public void setUpdater(long updater) {
 		this.updater = updater;
 	}
 
 
 
-
-	public Credential getUserCredential() {
-		return userCredential;
+	public Set<Template> getTemplates() {
+		return templates;
 	}
 
 
 
-
-	public void setUserCredential(Credential userCredential) {
-		this.userCredential = userCredential;
+	public void setTemplates(Set<Template> templates) {
+		this.templates = templates;
 	}
-
-
 
 
 
@@ -250,13 +230,11 @@ public class User {
 		result = prime * result + ((lastLogin == null) ? 0 : lastLogin.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + (state ? 1231 : 1237);
+		result = prime * result + ((templates == null) ? 0 : templates.hashCode());
 		result = prime * result + ((updated == null) ? 0 : updated.hashCode());
 		result = prime * result + (int) (updater ^ (updater >>> 32));
-		result = prime * result + ((userCredential == null) ? 0 : userCredential.hashCode());
 		return result;
 	}
-
-
 
 
 
@@ -300,6 +278,11 @@ public class User {
 			return false;
 		if (state != other.state)
 			return false;
+		if (templates == null) {
+			if (other.templates != null)
+				return false;
+		} else if (!templates.equals(other.templates))
+			return false;
 		if (updated == null) {
 			if (other.updated != null)
 				return false;
@@ -307,17 +290,20 @@ public class User {
 			return false;
 		if (updater != other.updater)
 			return false;
-		if (userCredential == null) {
-			if (other.userCredential != null)
-				return false;
-		} else if (!userCredential.equals(other.userCredential))
-			return false;
 		return true;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", state=" + state + ", lastLogin=" + lastLogin + ", created=" + created + ", updated=" + updated
+				+ ", creator=" + creator + ", updater=" + updater + ", templates=" + templates + "]";
+	}
+
 	
-	
-	
+
 	
 	
 	
