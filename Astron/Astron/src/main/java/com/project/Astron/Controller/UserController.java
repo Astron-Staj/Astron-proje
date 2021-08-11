@@ -3,6 +3,7 @@ package com.project.astron.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -24,7 +25,7 @@ public class UserController {
 	@Autowired
 	IUserService userService;
 	
-	
+	@PreAuthorize("hasAuthority('USER_READ_ALL')")
 	@GetMapping("all")
 	public List<User> getAll() {
 		return userService.findAll();
