@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/css/**","/fonts/**","/js/**","/static/**","/images/**","/vendor/**").permitAll()
+        .antMatchers("/media/**","/css/**","/fonts/**","/js/**","/static/**","/images/**","/vendor/**","/resources/**").permitAll()
                 .antMatchers("/login").permitAll()
                 //  .antMatchers("/cre/**","/template/**","/authority/**").hasAuthority("SUPERADMIN")
                 //	.antMatchers("/user/**").hasAnyAuthority("SUPERADMIN","ADMIN")
@@ -49,7 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/login");
     }
     
-  
     
 
     @Bean

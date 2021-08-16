@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.project.astron.service","com.project.astron.controller","com.project.astron"})
+@ComponentScan({"com.project.astron.service","com.project.astron.controller","com.project.astron","com.project.astron.dto.mapper"})
 @EntityScan("com.project.astron.model")
 public class AstronApplication {
 

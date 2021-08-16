@@ -24,9 +24,9 @@ public class HomeConttroller {
         return "login";
     }
 	
-	@GetMapping({"/", "/welcome"})
+	@GetMapping({"/", "/dashboard"})
     public String welcome(Model model) {
-        return "welcome";
+        return "index";
     }
 	
 	

@@ -25,11 +25,5 @@ public class AuthorityServiceImpl implements IAuthorityService{
 
 
 
-
-	
-
-	
-	
-	
 	
 }

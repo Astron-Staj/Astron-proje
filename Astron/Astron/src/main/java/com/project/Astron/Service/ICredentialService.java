@@ -8,5 +8,9 @@ import com.project.astron.model.User;
 public interface ICredentialService {
 	List < Credential > findAll();
 	
-	Credential findByUsername(String username);
+	Credential findByUsername(String username) ;
+	Credential createCredential (Credential cre) throws Exception;
+	void deleteCredential (String username) throws Exception  ;
+	void updateCredential (String username) throws Exception;
+	long   CredentialCount ();
 }
