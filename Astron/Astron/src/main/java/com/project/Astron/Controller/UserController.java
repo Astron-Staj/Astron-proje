@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -40,12 +41,17 @@ public class UserController {
 	
 	@PreAuthorize("hasAuthority('USER_READ_ALL')")
 	@GetMapping("all")
-	public ModelAndView userTable() {
+	public ModelAndView userTable(Authentication authentication) {
 		ModelAndView mav = new ModelAndView();
+		String username=authentication.getName();
+		mav.addObject("currentUser",credentialService.findByUsername(username).getUser());
 		mav.addObject("users",userService.findAll());
 		mav.setViewName("userRead");
 		return mav;
 	}
+	
+	
+	
 	
 	@GetMapping("delete")
 	public String delete() {
@@ -74,16 +80,15 @@ public class UserController {
 	
 	
 	@PostMapping("/process_register")
-	public String processRegister(UserCreateDTO userCreateDTO) {
+	public String processRegister(UserCreateDTO userCreateDTO,Authentication authentication) {
 		UserCreateMapper mapper=new UserCreateMapper();
-		
+		String username=authentication.getName();
 		List<Object> list=mapper.toEntity(userCreateDTO);
 		try {
-		
-		
 		User user= ((User)list.get(0)); 
 		Credential credential=(Credential)list.get(1);
-											//user= userService.createUser((User)list.get(0)); 
+		user.setCreator(credentialService.findByUsername(username).getUserId());
+		//user= userService.createUser((User)list.get(0)); 
 		user.getTemplates().add(templateService.findByName("USER"));
 		credential.setUser(user);
 		credentialService.createCredential(credential);
