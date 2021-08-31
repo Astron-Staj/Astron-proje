@@ -86,6 +86,20 @@ public class User {
 
 
 
+	public User( String email, String firstName, String lastName, boolean state, Date created,
+			Date updated) {
+		
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.state = state;
+		this.lastLogin = lastLogin;
+		this.created = created;
+		this.updated = updated;
+	
+	}
+
+
 	public long getId() {
 		return id;
 	}

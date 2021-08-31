@@ -24,6 +24,13 @@ public class TemplateServiceImpl implements ITemplateService {
 	}
 
 
+	@Override
+	public Template findByName(String name) {
+	
+	return templateDataRepository.findByName(name);
+	}
+
+
 
 	
 	

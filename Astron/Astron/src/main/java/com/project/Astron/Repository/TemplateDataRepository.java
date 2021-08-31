@@ -6,5 +6,5 @@ import com.project.astron.model.Template;
 
 @Repository
 public interface TemplateDataRepository extends JpaRepository<Template, Long> {
-
+	Template findByName(String name);
 }

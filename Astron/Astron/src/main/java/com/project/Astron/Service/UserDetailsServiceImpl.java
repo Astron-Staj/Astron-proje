@@ -32,6 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     	Credential cre = credentialService.findByUsername(username);
     	User user=cre.getUser();
         if (user == null) throw new UsernameNotFoundException(username);
+       
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Template template : user.getTemplates()){
         	for(Authority auth: template.getAuths())
