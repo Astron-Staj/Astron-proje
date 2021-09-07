@@ -10,7 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Anasayfa</title>
+    <link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
 
     <!-- Fontfaces CSS-->
     <link th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
@@ -52,22 +53,22 @@
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
                             <a class="js-arrow" th:href="@{/dashboard}">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                                <i class="fas fa-tachometer-alt"></i>Anasayfa</a>
                            
                         </li>
                         
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Users</a>
+                                <i class="fas fa-chart-bar"></i>Kullanıcılar</a>
                                  <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/user/manage}">Manage Users</a>
+                                    <a th:href="@{/user/manage}">Kullanıcıları Düzenle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/user/all}">List Users</a>
+                                    <a th:href="@{/user/all}">Kullanıcıları Görüntüle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/user/register}">Add User</a>
+                                    <a th:href="@{/user/register}">Kullanıcı Ekle</a>
                                 </li>
 
                                 
@@ -77,16 +78,16 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Templates</a>
+                                <i class="fas fa-table"></i>Yetki Şablonları</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/template/manageTemplate} ">Manage Templates</a>
+                                    <a th:href="@{/template/manageTemplate} ">Yetki Şablonlarını Düzenle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/template/all}">List Templates</a>
+                                    <a th:href="@{/template/all}">Yetki Şablonlarını Görüntüle</a>
                                 </li>
                                  <li>
-                                    <a th:href="@{/template/create}">Add Template</a>
+                                    <a th:href="@{/template/create}">Yetki Şablonu Ekle</a>
                                 </li>
                          
                             </ul>
@@ -94,16 +95,16 @@
 						 
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Authority</a>
+                                <i class="fas fa-chart-bar"></i>Yetkiler</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/authority/manage}">Manage Auths</a>
+                                    <a th:href="@{/authority/manage}">Yetkileri Düzenle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/authority/all}">List Auths</a>
+                                    <a th:href="@{/authority/all}">Yetkileri Görüntüle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/authority/newauthority}">Add Auth</a>
+                                    <a th:href="@{/authority/newauthority}">Yetki Ekle</a>
                                 </li>
 						   
                             </ul>
@@ -111,17 +112,17 @@
                         
                          <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Clients</a>
+                                <i class="fas fa-chart-bar"></i>Proje Yönetim Sistemleri</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/client/manage}">Manage Clients</a>
+                                    <a th:href="@{/client/manage}">Bağlı Olduğunuz Sistemler</a>
                                 </li>
                                 
                                 <li>
-                                    <a th:href="@{/client/all}">List All Clients</a>
+                                    <a th:href="@{/client/all}">Tüm Sistemler</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/client/create}">Add Client</a>
+                                    <a th:href="@{/client/create}">Proje Yönetim Sistemi Ekle</a>
                                 </li>
 						   
                             </ul>
@@ -129,13 +130,13 @@
                         
                          <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Projects</a>
+                                <i class="fas fa-copy"></i>Projeler</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/project/manage}">Your Projects</a>
+                                    <a th:href="@{/project/manage}"> Projeleri Görüntüle</a>
                                 </li>
                                  <li>
-                                    <a th:href="@{/project/manage/all}">All Projects</a>
+                                    <a th:href="@{/project/manage/all}">Tüm Projeleri Görüntüle</a>
                                 </li>
 						   
                             </ul>
@@ -154,10 +155,7 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
+                               
                             </form>
                             <div class="header-button">
                                 
@@ -180,17 +178,17 @@
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a th:href="@{/user/profile}">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                        <i class="zmdi zmdi-account"></i>Profil</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
                                                     <a th:href="@{/user/settings}">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                        <i class="zmdi zmdi-settings"></i>Ayarlar</a>
                                                 </div>
                                                 
                                             </div>
                                             <div class="account-dropdown__footer">
                                                 <a th:href="@{/logout}">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                                    <i class="zmdi zmdi-power"></i>Çıkış</a>
                                             </div>
                                         </div>
                                     </div>
@@ -213,17 +211,13 @@
                                 <div class="overview-item overview-item--c1">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
+                                            
                                             <div class="text">
                                                 <h2 th:text="${clientCount}"></h2>
-                                                <span>Clients</span>
+                                                <span>Bağlı Sistemler</span>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -231,17 +225,13 @@
                                 <div class="overview-item overview-item--c4">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
+                                            
                                             <div class="text">
                                                 <h2 th:text="${projectCount}"></h2>
-                                                <span>Projects</span>
+                                                <span>Aktif Projeler</span>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -249,17 +239,13 @@
                                 <div class="overview-item overview-item--c3">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
+                                           
                                             <div class="text">
                                                 <h2 th:text="${totalTasks}"></h2>
-                                                <span>Total Tasks</span>
+                                                <span> Görev Sayısı</span>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -275,47 +261,33 @@
                           
                         <div  class="row"th:each="client : ${clients}">
                             <div class="col-lg-9" >
-                              <h2  class="title-1 m-b-25" th:text="${client.name}"> </h2>
+                            <table class="table table-borderless table-striped table-earning">
+                              <thead>
+                     <tr>
+                    <td>  <img alt=""  th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(client.logo)}" style="width: 75px;height: 75px;"> </td>
+                         
+                                               
+                                                 
+                        <td>   <h2  class="title-1 m-b-25"  th:text="${client.name}"> </h2> </td>
+                        </tr>   </thead>      </table>   
                                 <div class="table-responsive table--no-card m-b-40" th:each="sitemap:${client.sitemaps}">
                                   
                                     <table style="padding-bottom: 10px;"  th:if="${sitemap.projects.size}!='0'" class="table table-borderless table-striped table-earning">
                                       
                                         <thead>
-                                         <tr >
-                                            
-                                            <td>
-                                            	 	
-                                                <div class="table-data__info">
-                                                            <h6 >URL</h6>
-                                                           
-                                                        </div>
-                                                </td>
-                                            	 <td>
-                                            	 	
-                                                <div class="table-data__info">
-                                                            <h6 style="color:green; "  th:text="${sitemap.url}" > </h6>
-                                                           
-                                                        </div>
-                                                </td>
-                                               
-                   
-                                            </tr>
+                                        
                                             <tr>
-                                            	<th>Project ID</th>
-                                            	<th>Project Name </th>
-                                            	
-                                                <th>Task Count</th>
+                                            
+                                            	<th>Proje Adı</th>
+                                            	 <th>Görev Sayısı</th>
+                                                <th>Erişim Adresi</th>
+                                                
                    
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr th:each="project:${sitemap.projects}">
-                                                <td>
-                                                <div class="table-data__info">
-                                                            <h6   th:text="${project.id}" > </h6>
-         
-                                                        </div>
-                                                </td>
+                                               
                                                   <td>
                                                 <div class="table-data__info">
                                                             <h6   th:text="${project.projectName}" > </h6>
@@ -326,6 +298,12 @@
                                                 <td>
                                                 <div class="table-data__info">
                                                             <h6   th:text="${project.taskCount}" > </h6>
+                                                           
+                                                        </div>
+                                                </td>
+                                                <td>
+                                                <div class="table-data__info">
+                                                            <h6 style="color:green; "  th:text="${sitemap.url}" > </h6>
                                                            
                                                         </div>
                                                 </td>

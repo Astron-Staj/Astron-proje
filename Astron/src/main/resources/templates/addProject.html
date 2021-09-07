@@ -10,7 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>DIMGO</title>
+    <link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
 
     <!-- Fontfaces CSS-->
     <link th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
@@ -46,28 +47,40 @@
                     <img th:src="@{/main/images/icon/logoastron.png}" alt="Cool Admin" />
                 </a>
             </div>
-                        </div>
+                     
                         <div class="login-form">
                             <form th:action="@{/project/process_create}" th:object="${projectCreateDTO} "method="post">
                                <div class="form-group">
-                                    <label>Site Map ID</label>
-                                     <input type="text" th:field="*{siteMapId}" readonly="readonly" />
+                                    
+                                     <input type="hidden" th:field="*{siteMapId}"  readonly="readonly" />
                                 </div>
                         
                                 <div class="form-group">
-                                    <label>Name</label>
-                                    <input class="au-input au-input--full" required="true"  type="text" th:field="*{projectName}"  placeholder="Project Name">
+                                    <label>Proje Adı</label>
+                                    <input class="au-input au-input--full" required="true"  type="text" th:field="*{projectName}"  placeholder="Proje Adı">
+                                	<span style="color: red;" th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}"></span>
                                 </div>
                                 
                                 
                                 <div class="form-group">
-                                    <label>Task Count</label>
-                                    <input class="au-input au-input--full" required="true"  type="text" th:field="*{taskCount}"  placeholder="Task Count">
+                                    <label>Görev Sayısı</label>
+                                   
+                                  
+                                   <input class="au-input au-input--full" required="true"  type="number" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" th:field="*{taskCount}"  placeholder="Görev Sayısı">
+                                	<span style="color: red;" th:if="${#fields.hasErrors('taskCount')}" th:errors="*{taskCount}"></span>
                                 </div>
                                 
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">create Project</button>
-                               
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Proje Oluştur</button>
+  
+                                 <div class="form-header" >
+                               <p th:if="${error}" style="color: red;" th:text="${error}"></p>
+          						
+        						 <p th:if="${success}" style="color: green;" th:text="${success}"></p>
+                            </div>
                             </form>
+                                                        <center>            <a th:href="@{/welcome}">
+<button class="au-btn au-btn--block au-btn--green m-b-20" style="background-color:tomato; width:480px;">Anasayfa</button>
+ </a></center>
                             
                         </div>
                     </div>

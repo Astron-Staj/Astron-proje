@@ -24,11 +24,7 @@ public class TemplateUpdateMapper {
     
     	
     	Template newTemplate=new Template(dto.getId(),dto.getName(),dto.isState(),authList,temp.getCreated(),date,updater,temp.getCreator());
-    	
-        for (Authority auth : newTemplate.getAuths()) {
-			System.out.println(auth.name);
-			
-	}
+  
        
         
         return newTemplate;

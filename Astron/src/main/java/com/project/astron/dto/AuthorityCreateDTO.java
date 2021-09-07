@@ -1,12 +1,22 @@
 package com.project.astron.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Data
+@Getter
+@Setter
 public class AuthorityCreateDTO {
 
 	
-	
+	@NotBlank(message="Ad alanı boş kalamaz")
+	@Size(min = 2, max = 30,message = "Ad 2-30 karakterden oluşmalıdır.")
 	public String name;
+	
 	public boolean state;
 
 
@@ -32,15 +42,6 @@ public class AuthorityCreateDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 
 

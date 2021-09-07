@@ -10,8 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
-
+    <title>DIMGO</title>
+<link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
     <!-- Fontfaces CSS-->
     <link th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
     <link th:href="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
@@ -33,6 +33,10 @@
     <!-- Main CSS-->
     <link th:href="@{/css/theme.css}" rel="stylesheet" media="all">
 
+
+	
+	
+
 </head>
 
 <body class="animsition">
@@ -46,37 +50,44 @@
                     <img th:src="@{/main/images/icon/logoastron.png}" alt="Cool Admin" />
                 </a>
             </div>
-                        <div class="login-form">
+                        <div class="login-form" style="height:auto; ">
                             <form th:action="@{/template/process_create}" th:object="${templateDTO} "method="post">
                                 <div class="form-group">
-                                    <label>Template Name</label>
+                                    <label>Yetki Şablonu Adı</label>
                                     <input class="au-input au-input--full" required="true"  type="text" th:field="*{name}"  placeholder="Template Name">
+                               		<span style="color: red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                                 </div>
                                 <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label class=" form-control-label">Authorities</label>
+                                                    <label class=" form-control-label">Yetkiler</label>
                                                 </div>
                                                 <div class="col col-md-9">
                                                     <div class="form-check">
                                                         
                                                         <div th:each="auth: ${authorities} "  class="checkbox">
-                                                            <label for="checkbox3" class="form-check-label ">
+                                                          
                                                             
                                                                 <input type="checkbox" id="checkbox3" th:field="*{authority}" th:value="${auth.id}"  name="checkbox3"  class="form-check-input"> <p th:text="${auth.name}" ></p> 
-                                                            	
-                                                            </label>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                              	 <div class="form-group">
-                                    <label>Template State</label>
-                                     <input type="checkbox" th:field="*{state}" th:value="true"  /> Active
+                                    <label>Durum</label>
+                                     <input type="checkbox" th:field="*{state}" th:value="true"  /> Aktif
                                 </div>
                                 
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">create template</button>
-                               
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Yetki Şablonu oluştur</button>
+                               <div class="form-header" >
+                               <p th:if="${error}" style="color: red;" th:text="${error}"></p>
+          						
+        						 <p th:if="${success}" style="color: green;" th:text="${success}"></p>
+                            </div>
                             </form>
+                             <center>            <a th:href="@{/welcome}">
+<button class="au-btn au-btn--block au-btn--green m-b-20" style="background-color:tomato; width:480px;">Anasayfa</button>
+ </a></center>
                             
                         </div>
                     </div>

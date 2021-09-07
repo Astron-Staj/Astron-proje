@@ -1,13 +1,16 @@
 package com.project.astron.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.astron.model.Authority;
-
+import com.project.astron.model.Project;
+import com.project.astron.model.Template;
 import com.project.astron.repository.AuthorityDataRepository;
+import com.project.astron.repository.TemplateDataRepository;
 
 
 @Service
@@ -16,13 +19,26 @@ public class AuthorityServiceImpl implements IAuthorityService{
 	@Autowired
 	AuthorityDataRepository authorityDataRepository;
 	
-	
+	@Autowired
+	TemplateDataRepository templateDataRepository;
 	
 	@Override
 	public List<Authority> findAll() {
 		List <Authority> auths= authorityDataRepository.findAll();
+		List<Authority> activeAuths=new ArrayList<Authority>();
+		for (Authority authority : auths) {
+			if(authority.state)
+				activeAuths.add(authority);
+		}
 		
-		return auths;
+		return activeAuths;
+	}
+	
+	
+	
+	public List<Authority> findActiveInactive(){
+		List <Authority> all=authorityDataRepository.findAll();
+		return all;
 	}
 
 
@@ -38,73 +54,114 @@ public class AuthorityServiceImpl implements IAuthorityService{
 			return authority;
 		}		
 		else
-			throw new Exception("authority_already_exists");
+			throw new Exception("Yetki zaten kayıtlı!");
 		
 	}
 
 
 
-	@Override
-	public void saveAuthority(Authority auth) {
-		// TODO Auto-generated method stub
-		this.authorityDataRepository.save(auth);
-	}
-
-	@Override
-	public java.util.Optional<Authority> findAuthById(long id) {
-		
-		java.util.Optional<Authority> auth =authorityDataRepository.findById(id);
-		return	 auth;
 	
-	}
 
-	public void deletex(long id) {
-		authorityDataRepository.deleteById(id);
-	}
+	
 
-	@Override
-	public void deleteAuthority(Authority auth) throws Exception {
-		authorityDataRepository.delete(auth);
-		
-	}
+
 
 	@Override
-	public Authority findById(long id) {
-		// TODO Auto-generated method stub
-		//java.util.Optional<Authority> optional=authorityDataRepository.findById(id);
-		Authority auth = authorityDataRepository.getById(id);
+	public Authority findById(long id) throws Exception {
 		
 		
-		return auth;
+		if(authorityDataRepository.findById(id).get().equals(null))
+			throw new Exception("Kayıt Bulunamadı");
+		else
+		return authorityDataRepository.findById(id).get() ;
 	}
 	
 	@Override
 	public void deleteAuthority(long id) throws Exception {
-		Authority auth =authorityDataRepository.getById(id);
+		Authority auth =this.findById(id);
 		
 		if(auth==null) {
-			throw new Exception("authority_not_found");
+			throw new Exception("Kayıt Bulunamadı");
 		}		
 		else {
 			
-			authorityDataRepository.delete(auth);
-
+			
+			if(!auth.isState())
+				throw new Exception("Kayıt Zaten Pasif Durumda !");
+			else {	
+			this.deleteUpdateAuthority(auth);
+			}
 		}
 	}
 
 
+	
+	
+	@Override
+	public Authority deleteUpdateAuthority(Authority auth) throws Exception {
+		boolean isUsing=false;
+		
+			List<Template> templates = templateDataRepository.findAll();
+			for (Template temp : templates) {
+			for (Authority athrty : temp.getAuths()) {	
+				if(athrty.getName()==auth.getName()) {		
+					isUsing=true;
+			}
+			}
+		}	
+			
+			
+			if(isUsing) {
+			throw new Exception("Silmeye çalıştığınız kayıt kullanılıyor.");
+			}
+			
+			else {
+				auth.setState(false);
+			return authorityDataRepository.save(auth);
+			}
+
+	}
+	
 
 	@Override
 	public Authority updateAuthority(Authority auth) throws Exception {
-		//authorityDataRepository.
-		return null;
+		boolean isUsing=false;
+		
+		List<Template> templates = templateDataRepository.findAll();
+		if (!auth.state) {
+			
+			for (Template temp : templates) {
+			for (Authority athrty : temp.getAuths()) {
+				if(athrty.getId()==auth.id) {
+					isUsing=true;
+				
+				}
+					
+			}
+			
+		}	
+			}
+			
+		List<Authority> list=this.findActiveInactive();
+		boolean exist=false;
+		for (Authority prjct : list) {
+			if(prjct.getName().equals(auth.getName())&&prjct.getId()!=auth.getId())
+				exist=true;
+		}
+		
+			if(exist)
+				throw new Exception("Aynı isimle yetki mevcut");
+			else
+			{
+			if(isUsing) {
+				auth.setState(true);
+			throw new Exception("Pasif hale getirmeye çalıştığınız kayıt kullanılıyor.");
+			
+			}
+			else
+			return authorityDataRepository.save(auth);
+			}
 	}
 
-
-
-	@Override
-	public Authority get(long id) {
-		// TODO Auto-generated method stub
-		return authorityDataRepository.getById(id);
-	}
+	
 }

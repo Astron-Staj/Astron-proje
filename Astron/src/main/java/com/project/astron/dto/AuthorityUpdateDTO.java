@@ -1,11 +1,7 @@
 package com.project.astron.dto;
 
-
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.project.astron.model.Authority;
 
 import lombok.Data;
 import lombok.Getter;
@@ -14,29 +10,52 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class TemplateDTO {
+public class AuthorityUpdateDTO {
 
+	
+	public long id;
+	
 	@NotBlank(message="Ad alanı boş kalamaz")
 	@Size(min = 2, max = 30,message = "Ad 2-30 karakterden oluşmalıdır.")
 	public String name;
 	
-	public Authority[] authority;
 	public boolean state;
-	
-	
-	public TemplateDTO(String name, Authority[] authority,boolean state) {
-		
+
+
+	public boolean isState() {
+		return state;
+	}
+
+
+	public void setState(boolean state) {
+		this.state = state;
+	}
+
+
+
+
+	public AuthorityUpdateDTO(long id, String name, boolean state) {
 		super();
-		
+		this.id = id;
 		this.name = name;
-		this.authority = authority;
-		this.state=state;
+		this.state = state;
 	}
 
 
-	public TemplateDTO() {
-		super();
+	public AuthorityUpdateDTO() {
+		// TODO Auto-generated constructor stub
 	}
+
+
+
+
+
+
+
+	
+	
+	
+	
 	
 	
 	

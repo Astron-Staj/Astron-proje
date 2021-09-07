@@ -27,10 +27,11 @@ public class UserSettingsMapper {
     
     	
     	User newUser=new User(user.getId(),dto.getEmail(),dto.getFirstName(),dto.getLastName(),
-    			dto.isState(),user.getLastLogin(),
+    			user.getState(),user.getLastLogin(),
     			user.getCreated(),date,user.getCreator(),
     			updater);
     	newUser.setTemplates(user.getTemplates());
+    	newUser.setClients(user.getClients());
        Credential credential= new Credential(cre.getId(),dto.getUsername(),cre.getPassword(),cre.getUserId(),newUser);
         cre.setUsername(dto.getUsername());
     	

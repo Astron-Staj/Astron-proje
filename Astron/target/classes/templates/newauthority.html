@@ -10,8 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
-
+    <title>DIMGO</title>
+<link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
     <!-- Fontfaces CSS-->
     <link th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
     <link th:href="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
@@ -49,19 +49,27 @@
                         <div class="login-form">
                             <form th:action="@{/authority/process_saved}" th:object="${auth}"method="post">
                                 <div class="form-group">
-                                    <label>Authority Name</label>
-                                    <input class="au-input au-input--full" type="text" th:field="*{name}" placeholder="Authority Name">
+                                    <label>Yetki Adı</label>
+                                    <input class="au-input au-input--full" type="text" th:field="*{name}" required="required" placeholder="Yetki Adı">
+                                <span style="color: red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                                 </div>
                                <div class="form-group">
-                                    <label>Authority State</label>
-                                     <input type="checkbox" th:field="*{state}" th:value="true" />
+                               
+                                    <label>Durum</label>
+                                     <input type="checkbox" th:field="*{state}" th:value="true" />Aktif
                                 </div>
                                
                                 
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Create Authority</button>
-                               
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Yetki Oluştur</button>
+                               <div class="form-header" >
+                               <p th:if="${error}" style="color: red;" th:text="${error}"></p>
+          						
+        						 <p th:if="${success}" style="color: green;" th:text="${success}"></p>
+                            </div>
                             </form>
-                           
+                            <center>            <a th:href="@{/welcome}">
+<button class="au-btn au-btn--block au-btn--green m-b-20" style="background-color:tomato; width:480px;">Anasayfa</button>
+ </a></center>
                         </div>
                     </div>
                 </div>

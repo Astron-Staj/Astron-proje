@@ -49,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
                     .logoutSuccessUrl("/login").and()
+                    .exceptionHandling().accessDeniedPage("/forbidden").and()
                     .csrf().disable();	
     }
     

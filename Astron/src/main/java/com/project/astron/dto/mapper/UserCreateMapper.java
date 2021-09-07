@@ -30,7 +30,7 @@ public class UserCreateMapper {
         		,dto.getFirstName(),dto.getLastName(),true, date, date);
       
         
-        System.out.println(dto.getPassword());
+       
         Credential credential=new Credential(dto.getUsername(),passwordEncoder.encode(dto.getPassword()));
         		
         List <Object> list=new ArrayList<Object>();

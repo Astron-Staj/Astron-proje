@@ -8,15 +8,15 @@ import com.project.astron.model.Authority;
 
 public interface IAuthorityService {
 	List< Authority > findAll();
-	
-	
-	Authority findById(long id);
+	List< Authority > findActiveInactive();
+	Authority findById(long id)throws Exception;
 	Authority createAuthority (Authority auth) throws Exception;
-	void saveAuthority(Authority auth);
+	
 	void deleteAuthority (long id) throws Exception  ;
-	Optional<Authority> findAuthById(long id);
+	
 	Authority updateAuthority(Authority auth) throws Exception;
-	Authority get(long id);
-	void deleteAuthority(Authority auth) throws Exception;
+
+	
+	public Authority deleteUpdateAuthority(Authority auth) throws Exception;
 
 }

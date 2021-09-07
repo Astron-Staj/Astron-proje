@@ -18,6 +18,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.ToString;
 
@@ -30,12 +33,13 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public long id;
 	
+	 
 	@Column(name="email")
 	public String email;
-	
+
 	@Column(name="first_name")
 	public String firstName;
-	
+	 
 	@Column(name="last_name")
 	public String lastName;
 	

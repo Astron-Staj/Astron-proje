@@ -353,13 +353,6 @@ public class Client {
 			return true;
 		}
 
-		@Override
-		public String toString() {
-			return "Client [id=" + id + ", code=" + code + ", state=" + state + ", name=" + name +  ", created=" + created + ", updated=" + updated + ", creator=" + creator
-					+ ", updater=" + updater + ", users=" + users + ", sitemaps=" + sitemaps + "]";
-		}
-
-		
 		
 
 		

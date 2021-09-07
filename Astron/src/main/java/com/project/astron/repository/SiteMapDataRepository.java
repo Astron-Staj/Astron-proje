@@ -7,5 +7,5 @@ import com.project.astron.model.SiteMap;
 
 @Repository
 public interface SiteMapDataRepository extends JpaRepository<SiteMap,Long> {
-
+		SiteMap findByUrl(String url);
 }

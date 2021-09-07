@@ -10,8 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
-
+    <title>DIMGO</title>
+<link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
     <!-- Fontfaces CSS-->
     <link th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
     <link th:href="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
@@ -40,7 +40,7 @@
  
 
         <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
+         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a th:href="@{/welcome}">
                     <img th:src="@{/main/images/icon/logoastron.png}" alt="Cool Admin" />
@@ -51,22 +51,22 @@
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
                             <a class="js-arrow" th:href="@{/dashboard}">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                                <i class="fas fa-tachometer-alt"></i>Anasayfa</a>
                            
                         </li>
                         
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Users</a>
+                                <i class="fas fa-chart-bar"></i>Kullanıcılar</a>
                                  <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/user/manage}">Manage Users</a>
+                                    <a th:href="@{/user/manage}">Kullanıcıları Düzenle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/user/all}">List Users</a>
+                                    <a th:href="@{/user/all}">Kullanıcıları Görüntüle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/user/register}">Add User</a>
+                                    <a th:href="@{/user/register}">Kullanıcı Ekle</a>
                                 </li>
 
                                 
@@ -76,16 +76,16 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Templates</a>
+                                <i class="fas fa-table"></i>Yetki Şablonları</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/template/manageTemplate} ">Manage Templates</a>
+                                    <a th:href="@{/template/manageTemplate} ">Yetki Şablonlarını Düzenle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/template/all}">List Templates</a>
+                                    <a th:href="@{/template/all}">Yetki Şablonlarını Görüntüle</a>
                                 </li>
                                  <li>
-                                    <a th:href="@{/template/create}">Add Template</a>
+                                    <a th:href="@{/template/create}">Yetki Şablonu Ekle</a>
                                 </li>
                          
                             </ul>
@@ -93,49 +93,48 @@
 						 
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Authority</a>
+                                <i class="fas fa-chart-bar"></i>Yetkiler</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/authority/manage}">Manage Auths</a>
+                                    <a th:href="@{/authority/manage}">Yetkileri Düzenle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/authority/all}">List Auths</a>
+                                    <a th:href="@{/authority/all}">Yetkileri Görüntüle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/authority/newauthority}">Add Auth</a>
+                                    <a th:href="@{/authority/newauthority}">Yetki Ekle</a>
                                 </li>
 						   
                             </ul>
                         </li>
-                    
-                    
-                    <li class="has-sub">
+                        
+                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Clients</a>
+                                <i class="fas fa-chart-bar"></i>Proje Yönetim Sistemleri</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/client/manage}">Manage Clients</a>
+                                    <a th:href="@{/client/manage}">Bağlı Olduğunuz Sistemler</a>
                                 </li>
-                                 
+                                
                                 <li>
-                                    <a th:href="@{/client/all}">List All Clients</a>
+                                    <a th:href="@{/client/all}">Tüm Sistemler</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/client/create}">Add Client</a>
+                                    <a th:href="@{/client/create}">Proje Yönetim Sistemi Ekle</a>
                                 </li>
 						   
                             </ul>
                         </li>
-                    
-                    <li class="has-sub">
+                        
+                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Projects</a>
+                                <i class="fas fa-copy"></i>Projeler</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/project/manage}">Your Projects</a>
+                                    <a th:href="@{/project/manage}"> Projeleri Görüntüle</a>
                                 </li>
                                  <li>
-                                    <a th:href="@{/project/manage/all}">All Projects</a>
+                                    <a th:href="@{/project/manage/all}">Tüm Projeleri Görüntüle</a>
                                 </li>
 						   
                             </ul>
@@ -150,48 +149,47 @@
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
+       <header class="header-desktop">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
+                            <div class="form-header" >
+                               <p th:if="${error}" style="color: red;" th:text="${error}"></p>
+          						
+        						 <p th:if="${success}" style="color: green;" th:text="${success}"></p>
+                            </div>
                             <div class="header-button">
-                               
+                                
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                     
+                                        
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#"    th:text="${currentUser.firstName}+'  '  + ${currentUser.lastName}"></a>
+                                            <a class="js-acc-btn" href="#"  th:text="${currentUser.firstName }+ '  '  + ${ currentUser.lastName}"></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"   th:text="${currentUser.firstName}+'  '  + ${currentUser.lastName}" ></a>
+                                                        <a href="#"  th:text="${currentUser.firstName} +'  ' + ${currentUser.lastName}"></a>
                                                     </h5>
-                                                    <span class="email"  th:text="${currentUser.email} "    ></span>
+                                                    <span class="email" th:text="${currentUser.email}"></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a th:href="@{/user/profile}">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                        <i class="zmdi zmdi-account"></i>Profil</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
                                                     <a th:href="@{/user/settings}">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                        <i class="zmdi zmdi-settings"></i>Ayarlar</a>
                                                 </div>
                                                 
                                             </div>
                                             <div class="account-dropdown__footer">
                                                 <a th:href="@{/logout}">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                                    <i class="zmdi zmdi-power"></i>Çıkış</a>
                                             </div>
                                         </div>
                                     </div>
@@ -212,17 +210,18 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <strong>Update User</strong>
+                                        <strong></strong>
                                     </div>
                                     <div class="card-body card-block">
                                         <form th:action="@{/user/process_update}" method="post"  th:object="${userUpdateDTO}" class="form-horizontal">
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label class=" form-control-label">Username</label>
+                                                    <label class=" form-control-label">Kullanıcı Adı</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input class="form-control-static"  th:field="*{username}"  readonly="readonly" >
                                                 </div>
+                                                <span style="color: red;" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
                                             </div>
                                             
                                             <div class="row form-group">
@@ -232,60 +231,82 @@
                                                 <div class="col-12 col-md-9">
                                                     <input type="email" id="email-input" th:field="*{email}"   name="email-input"  class="form-control">
                                                 </div>
+                                                 <span style="color: red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                                             </div>
                                           
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="email-input"  class="  form-control-label">Firstname </label>
+                                                    <label for="email-input"  class="  form-control-label">Ad</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="email-input"  th:field="*{firstName}"   class="form-control">
                                                     
                                                 </div>
+                                                 <span style="color: red;" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
                                             </div>
                                              <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="email-input" class=" form-control-label">Lastname </label>
+                                                    <label for="email-input" class=" form-control-label">Soyad</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <input type="text" id="email-input"  th:field="*{lastName}"    class="form-control">
                                                
                                                 </div>
+                                                 <span style="color: red;" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
                                             </div>
-                                            <label for="checkbox3" class="form-check-label ">Templates </label>
-                                          	 <div th:each="temp: ${template} "  class="checkbox" >
-                                                                 <label for="checkbox3" class="form-check-label ">
-                                                            
-                                                                <input type="checkbox" id="checkbox3" th:field="*{templates}" th:value="${temp.id}"  name="checkbox3"  class="form-check-input"> <p th:text="${temp.name}" ></p> 
-                                                            	
-                                                             </label>
-                                                        </div>
+                                              <div class="row form-group">
+                                                	<div class="col col-md-3">
+                                                    <label class=" form-control-label">Kullanıcının Yetki Şablonları</label>
+                                                     </div>
+                                                     <div class="col col-md-9">
+                                                    <div class="form-check">
                                                         
-                                                         <label for="checkbox3" class="form-check-label ">Clients </label>
-                                          	 <div th:each="cli: ${client} "  class="checkbox" >
-                                                                 <label for="checkbox3" class="form-check-label ">
+                                          	 <div th:each="temp: ${template} "   class="checkbox">
+                                                              
                                                             
-                                                                <input type="checkbox" id="checkbox3" th:field="*{clients}" th:value="${cli.id}"  name="checkbox3"  class="form-check-input"> <p th:text="${cli.name}" ></p> 
+                                                                <input  type="checkbox" id="checkbox3" th:field="*{templates}" th:value="${temp.id}"  name="checkbox3"  class="form-check-input"> <p th:text="${temp.name}" ></p> 
                                                             	
-                                                             </label>
-                                                        </div>    
+
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                                        <div class="row form-group">
+                                                	<div class="col col-md-3">
+                                                    <label class=" form-control-label">Kullanıcının Bağlı Olduğu Sistemler</label>
+                                                     </div>
+                                                     <div class="col col-md-9">
+                                                    <div class="form-check">
+                                                        
+                                          	 <div th:each="cli: ${client} "   class="checkbox">
+                                                             
+                                                            
+                                                                <input  type="checkbox" id="checkbox3" th:field="*{clients}" th:value="${cli.id}"  name="checkbox3"  class="form-check-input"> <p th:text="${cli.name}" ></p> 
+                                                           
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>    
                                                     
                                              		 <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                <label>State</label>
-                                                <input type="checkbox"  th:field="*{state}" th:value="true" >
+                                                <label>Durum</label> <br>
+                                                <input type="checkbox"  th:field="*{state}" th:value="true" >  Aktif
                                                 </div>
                                                 </div>
                                             
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> Update User
+                                            <i class="fa fa-dot-circle-o"></i> Kullanıcı Güncelle
                                         </button>
                                         <button type="reset" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-ban"></i> Reset
+                                            <i class="fa fa-ban"></i> Temizle
                                         </button>
                                     </div>
                                     </form>
+                                     <center>            <a th:href="@{/welcome}">
+<button class="au-btn au-btn--block au-btn--green m-b-20" style="background-color:tomato; width:480px;">Anasayfa</button>
+ </a></center>
                                 </div>
                              
                             </div>

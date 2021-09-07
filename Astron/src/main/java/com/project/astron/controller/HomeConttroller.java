@@ -31,12 +31,20 @@ public class HomeConttroller {
 	@GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model.addAttribute("error", "Kullanıcı adı veya şifre hatalı!");
 
         if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+            model.addAttribute("message", "Başarıyla çıkış yaptınız.");
 
         return "login";
+    }
+	
+	
+	@GetMapping("/forbidden")
+    public String login() {
+        
+
+        return "accessDenied";
     }
 	
 	
@@ -49,7 +57,7 @@ public class HomeConttroller {
 		User user=credential.getUser();
 		user.setLastLogin(date);
 		credential.setUser(user);
-		credentialService.updateCredential(credential);
+		credentialService.updateCre(credential);
 		userService.updateUser(user);
 		
 		long projectCount=0;
@@ -77,6 +85,7 @@ public class HomeConttroller {
 		mav.addObject("currentUser",credentialService.findByUsername(username).getUser());
 		mav.addObject("clients",credentialService.findByUsername(username).getUser().getClients());
 		mav.addObject("projectCount",projectCount);
+		mav.addObject("imgUtil", new ImageUtil());
 		mav.addObject("clientCount",credentialService.findByUsername(username).getUser().getClients().size());
 		mav.addObject("totalTasks",taskCount);
 		mav.setViewName("index");

@@ -9,10 +9,11 @@ import com.project.astron.model.SiteMap;
 
 public interface IProjectService {
 
-	void createProject(Project project);
+	void createProject(Project project)throws Exception ;
 	List<Project> findAll();
-	Optional<Project> findById(long id);
-	void updateProject(Project project);
+	
+	Optional<Project> findById(long id) throws Exception;
+	void updateProject(Project project)throws Exception ;
 	void deleteProject(Project project);
 	
 	

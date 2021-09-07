@@ -9,9 +9,10 @@ import com.project.astron.model.SiteMap;
 
 public interface ISiteMapService {
 
-	void createSiteMap(SiteMap sitemap);
+	void createSiteMap(SiteMap sitemap) throws Exception;
 	List<SiteMap> findAll();
-	Optional<SiteMap> findById(long id);
-	void updateSiteMap(SiteMap siteMap);
+	SiteMap findByUrl(String url);
+	Optional<SiteMap> findById(long id) throws Exception;
+	void updateSiteMap(SiteMap siteMap)throws Exception;
 	void deleteSiteMap(SiteMap siteMap);
 }

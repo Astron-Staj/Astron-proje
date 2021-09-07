@@ -7,11 +7,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.astron.dto.ClientCreateDTO;
 import com.project.astron.dto.ClientUpdateDTO;
@@ -51,90 +56,131 @@ public class ClientController {
 	@Autowired
 	IUserService userService;
 	
-	
+	@PreAuthorize("hasAuthority('CLIENT_MANAGE_ALL')")
 	@GetMapping("/all")
-	public ModelAndView userTable(Authentication authentication) {
+	public ModelAndView userTable(String error,String success,Model m,Authentication authentication) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String username=authentication.getName();
 		mav.addObject("currentUser",credentialService.findByUsername(username).getUser());
-		mav.addObject("clients",clientService.findAll());
+		mav.addObject("clients",clientService.findActiveInactive());
 		mav.addObject("imgUtil", new ImageUtil());
+		
+		
+		if (error != null)
+            m.addAttribute("error",error);
+	  
+	  if (success != null)
+            m.addAttribute("success",success);
+		
 		mav.setViewName("manageAllClients");
 		return mav;
 	}
 	
 	
-	
+	@PreAuthorize("hasAuthority('CLIENT_MANAGE_YOURS')")
 	@GetMapping("/manage")
-    public ModelAndView getClients(Authentication authentication) {
+    public ModelAndView getClients(Authentication authentication,String error,String success,Model m) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String username=authentication.getName();
 		mav.addObject("currentUser",credentialService.findByUsername(username).getUser());
 		Credential credential = credentialService.findByUsername(authentication.getName());
 		mav.addObject("clients",credential.getUser().getClients());	
 		mav.addObject("imgUtil", new ImageUtil());
+		
+		
+		if (error != null)
+            m.addAttribute("error",error);
+	  
+	  if (success != null)
+            m.addAttribute("success",success);
+		
 		mav.setViewName("manageClient");
         return mav ;
     }
 	
-
+	@PreAuthorize("hasAuthority('CLIENT_CREATE')")
 	@GetMapping("/create")
-	public ModelAndView showRegistrationForm(ClientCreateDTO clientCreateDTO) {
+	public ModelAndView showRegistrationForm(Model m,String error, String success,ClientCreateDTO clientCreateDTO) {
 		ModelAndView model = new ModelAndView("clientCreateDTO");
  		model.setViewName("createClient");
+ 		clientCreateDTO.setState(true);
 		model.addObject(clientCreateDTO);
+	
+		if (error != null)
+            m.addAttribute("error");
+	  
+	  if (success != null)
+            m.addAttribute("success");
+		
+		
 		return model;
 	}
 	
 
 	@PostMapping("/process_create")
-	public String processRegister(Authentication authentication,ClientCreateDTO dto) {
+	public String processRegister(RedirectAttributes redirectAttributes,@Valid @ModelAttribute("clientCreateDTO") ClientCreateDTO dto,BindingResult bindingResult ,Model model,Authentication authentication) {
 		
 		ClientCreateMapper clientCreateMapper=new ClientCreateMapper();
 		String username=authentication.getName();
+			ModelAndView mav = new ModelAndView("createClient");
+			mav.addObject("clientCreateDTO",dto);
+		
+		if (bindingResult.hasErrors()) {
+		
+			return "createClient";
+		}
 		
 		try {
 		User user= credentialService.findByUsername(username).getUser();
 		Client client=clientCreateMapper.toEntity(dto, user,dto.getLogo());
 		clientService.createClient(client);
 		user.getClients().add(client);
+	
 		userService.updateUser(user);
-	    return "redirect:/client/all";
+		redirectAttributes.addFlashAttribute("success", "Kayıt başarılı");
+		return "redirect:/client/create/";
 	}
 		catch (Exception e) {
-			return e.getMessage();
+			redirectAttributes.addFlashAttribute("error", "Kayıt işlemi sırasında hata oluştu:"+e.getMessage());
+			return "redirect:/client/create/";
 		}
 }
 	
-	
+	@PreAuthorize("hasAuthority('CLIENT_DELETE')")
 	@GetMapping("process_delete/{id}")
-	public String delete(@PathVariable(value="id")long id,Authentication authentication) {
+	public String delete(RedirectAttributes redirectAttributes,Model model,String error, String success,@PathVariable(value="id")long id,Authentication authentication) throws Exception {
 		try {
 		Optional<Client> client=clientService.findById(id);
-			Credential cre=credentialService.findByUsername(authentication.getName());
-			User user=cre.getUser();
-			user.getClients().remove(client.get());
-			userService.updateUser(user);
-			client.get().getUsers().clear();
-			client.get().getSitemaps().clear();
-			clientService.updateClient(client.get());
+			
 			 client=clientService.findById(id);
 			clientService.deleteClient(client.get());
-			return "redirect:/client/manage";
+			redirectAttributes.addFlashAttribute("success", "Silme işlemi başarılı");
+			return "redirect:/client/manage/";
 		} catch (Exception e) {
 			
-			return e.getMessage();
+			redirectAttributes.addFlashAttribute("error", "Silme işlemi sırasında hata oluştu: "+e.getMessage());
+			return "redirect:/client/manage/";
 		}
 
 	}
-	
+	@PreAuthorize("hasAuthority('CLIENT_UPDATE')")
 	@GetMapping("/update/{id}")
-	public ModelAndView showEditPage(@PathVariable(value = "id") long id,Authentication authentication) {
-		String username=authentication.getName();
-	    ModelAndView mav = new ModelAndView("clientUpdateDTO");
+	public ModelAndView showEditPage(Model model,String error, String success,@PathVariable(value = "id") long id,Authentication authentication) throws Exception  {
+		 ModelAndView mav = new ModelAndView("clientUpdateDTO");
 	  ClientUpdateDTO dto = new ClientUpdateDTO();
 	   Optional<Client> clientOpt=clientService.findById(id);
-	   Client client=clientService.findByCode(clientOpt.get().code);
+	   Client client=new Client();
+	try {
+		client = clientService.findByCode(clientOpt.get().code);
+	} catch (Exception e) {
+		model.addAttribute("error","Güncelleme işlemi sırasında hata"+e.getMessage() );
+		return getClients(authentication, "Güncelleme işlemi sırasında hata"+e.getMessage(), null, model);
+		
+	}
+		
+		String username=authentication.getName();
+	
+	
 	  dto.setCode(client.getCode());
 	   dto.setName(client.getName());
 	   dto.setState(client.getState());
@@ -142,25 +188,59 @@ public class ClientController {
 	   mav.addObject("currentUser",credentialService.findByUsername(username).getUser());
 
 	    mav.addObject("clientUpdateDTO",dto);
+	    if (error != null)
+            model.addAttribute("error",error);
+	  
+	  if (success != null)
+            model.addAttribute("success",success);
+	     mav.setViewName("updateTemplate");
+	    
+	    
 	     mav.setViewName("updateClient");
 	   
 	    return mav;
 	}
 	
 	@RequestMapping(value = "/process_update", method = RequestMethod.POST)
-	public String saveUpdate(@ModelAttribute() ClientUpdateDTO clientUpdateDTO,Authentication authentication) throws Exception {
+	public ModelAndView saveUpdate(@Valid @ModelAttribute("clientUpdateDTO") ClientUpdateDTO clientUpdateDTO,BindingResult bindingResult,Model model,String error, String success,Authentication authentication) throws Exception  {
 		
 
-		Credential credential= credentialService.findByUsername(authentication.getName());
+		long id;
+		try {
+			id = clientService.findByCode(clientUpdateDTO.getCode()).getId();
+		} catch (Exception e1) {
+			model.addAttribute("error","Güncelleme işlemi sırasında hata"+e1.getMessage() );
+			return getClients(authentication,"Güncelleme işlemi sırasında hata"+e1.getMessage() , null, model);
+		}	
+		ModelAndView mav = new ModelAndView("updateClient");
+			mav.addObject("currentUser",credentialService.findByUsername(authentication.getName()).getUser());
+			 mav.addObject("clientUpdateDTO",clientUpdateDTO);
+		if(bindingResult.hasErrors()) {
 		
+			 return mav;
+		}
+		try {
+			Credential credential= credentialService.findByUsername(authentication.getName());
 
 		Client client=clientService.findByCode(clientUpdateDTO.getCode());
 		client.setName(clientUpdateDTO.getName());
 		client.setState(clientUpdateDTO.isState());
 		client.setUpdated(new Date());
 		client.setUpdater(credential.getUserId());
-		clientService.updateClient(client);
-	    return "redirect:/client/manage";
+		
+			
+		
+			
+			
+			clientService.updateClient(client);
+			model.addAttribute("success", "Güncelleme işlemi Başarılı");
+			return getClients(authentication, null, "Güncelleme işlemi Başarılı", model);
+			
+		} catch (Exception e) {
+			model.addAttribute("error", "Güncelleme işlemi sırasında hata oluştu"+e.getMessage());
+			return showEditPage(model,"Güncelleme işlemi sırasında hata oluştu"+e.getMessage(), null, id , authentication);
+		}
+		
 	}
 	
 	

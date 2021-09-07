@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "credential", schema = "public")
@@ -19,8 +21,11 @@ public class Credential {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public long id;
 	
+	
 	@Column(name="username")
 	public String username;
+	
+	
 	
 	@Column(name="password")
 	public String password;

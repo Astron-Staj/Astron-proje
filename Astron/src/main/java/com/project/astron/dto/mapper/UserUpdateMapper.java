@@ -22,6 +22,7 @@ public class UserUpdateMapper {
     public List<Object> toEntity(UserUpdateDTO dto,User user,Credential cre,long updater) {
     	Date date=new Date();
     	List <Template> templateList =new  ArrayList<Template>();
+    	
     	for (Template temp : dto.getTemplates()) {
 				templateList.add(temp);
 		
@@ -33,8 +34,7 @@ public class UserUpdateMapper {
 				clientList.add(client);
 		
 		}
-    	
-    
+
     	
     	User newUser=new User(user.getId(),dto.getEmail(),dto.getFirstName(),dto.getLastName(),
     			dto.isState(),user.getLastLogin(),

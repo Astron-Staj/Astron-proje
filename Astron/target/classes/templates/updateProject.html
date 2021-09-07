@@ -10,8 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
-
+    <title>DIMGO</title>
+<link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
     <!-- Fontfaces CSS-->
     <link th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
     <link th:href="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
@@ -49,22 +49,31 @@
                         <div class="login-form">
                             <form th:action="@{/project/process_update}" th:object="${projectUpdateDTO} "method="post">
                                <div class="form-group">
-                                    <label>ID</label>
-                                     <input type="text" th:field="*{Id}" readonly="readonly" />
+                                    
+                                     <input type="hidden" th:field="*{Id}" readonly="readonly" />
                                 </div>
                         
                                 <div class="form-group">
-                                    <label>Project Name</label>
+                                    <label>Proje Adı</label>
                                     <input class="au-input au-input--full" required="true"  type="text" th:field="*{projectName}"  placeholder="projectName">
+                                	  <span style="color: red;" th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}"></span>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label>Task Count</label>
-                                    <input class="au-input au-input--full" required="true"  type="text" th:field="*{taskCount}"  placeholder="taskCount">
+                                    <label>Görev Sayısı</label>
+                                    <input class="au-input au-input--full" required="true"  type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" th:field="*{taskCount}"  placeholder="taskCount">
+                                    <span style="color: red;" th:if="${#fields.hasErrors('taskCount')}" th:errors="*{taskCount}"></span>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Update Project</button>
-                               
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Proje Güncelle</button>
+                               <div class="form-header" >
+                               <p th:if="${error}" style="color: red;" th:text="${error}"></p>
+          						
+        						 <p th:if="${success}" style="color: green;" th:text="${success}"></p>
+                            </div>
                             </form>
+                             <center>            <a th:href="@{/welcome}">
+<button class="au-btn au-btn--block au-btn--green m-b-20" style="background-color:tomato; width:480px;">Anasayfa</button>
+ </a></center>
                             
                         </div>
                     </div>

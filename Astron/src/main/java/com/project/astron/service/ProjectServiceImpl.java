@@ -21,20 +21,57 @@ public class ProjectServiceImpl implements IProjectService {
 	}
 
 	@Override
-	public void createProject(Project project) {
+	public void createProject(Project project) throws Exception {
+		
+		Optional<Project> p= projectDataRepository.findById(project.id);
+		
+		List<Project> list=this.findAll();
+		boolean exist=false;
+		for (Project prjct : list) {
+			if(prjct.getProjectName().equals(project.getProjectName()))
+				exist=true;
+		}
+		
+		
+		
+		if(exist)
+		throw new Exception("Aynı isimle proje mevcut");
+		else
 		projectDataRepository.save(project);
+		
+		
+			
+		
+		
 		
 	}
 
 	@Override
-	public Optional<Project> findById(long id) {
+	public Optional<Project> findById(long id) throws Exception{
+		Optional<Project> p= projectDataRepository.findById(id);
+		if(p.get()==null)
+			throw new Exception("Kayıt bulunamadı");
+		else 
+			return p;
 		
-		return projectDataRepository.findById(id);
+		
 	}
 
 	@Override
-	public void updateProject(Project project) {
-		projectDataRepository.save(project);
+	public void updateProject(Project project) throws Exception {
+		Optional<Project> p= projectDataRepository.findById(project.id);
+		List<Project> list=this.findAll();
+		boolean exist=false;
+		for (Project prjct : list) {
+			if(prjct.getProjectName().equals(project.getProjectName())&&prjct.getId()!=project.getId())
+				exist=true;
+		}
+		
+			if(exist)
+				throw new Exception("Aynı isimle proje mevcut");
+			else
+				projectDataRepository.save(project);
+		
 		
 	}
 
@@ -44,6 +81,9 @@ public class ProjectServiceImpl implements IProjectService {
 		
 	}
 
+	
+	
+	
 	
 	
 	

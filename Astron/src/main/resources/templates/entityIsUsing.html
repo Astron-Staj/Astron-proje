@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +11,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>DIMGO</title>
-    <link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
-
+    <title>Anasayfa</title>
+<link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
     <!-- Fontfaces CSS-->
     <link th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
     <link th:href="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
@@ -38,59 +38,30 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <div class="page-content--bge5">
-            <div class="container">
-                <div class="login-wrap">
-                    <div class="login-content">
-                          <div class="logo">
-              
-                    <img th:src="@{/main/images/icon/logoastron.png}" alt="Cool Admin" />
-                </a>
-            </div>
-                     
-                        <div class="login-form">
-                            <form th:action="@{/project/process_create}" th:object="${projectCreateDTO} "method="post">
-                               <div class="form-group">
-                                    
-                                     <input type="hidden" th:field="*{siteMapId}"  readonly="readonly" />
-                                </div>
+ 
+
+       
+
+               <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                    
                         
-                                <div class="form-group">
-                                    <label>Proje Adı</label>
-                                    <input class="au-input au-input--full" required="true"  type="text" th:field="*{projectName}"  placeholder="Proje Adı">
-                                	<span style="color: red;" th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}"></span>
-                                </div>
-                                
-                                
-                                <div class="form-group">
-                                    <label>Görev Sayısı</label>
-                                   
-                                  
-                                   <input class="au-input au-input--full" required="true"  type="number" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" th:field="*{taskCount}"  placeholder="Görev Sayısı">
-                                	<span style="color: red;" th:if="${#fields.hasErrors('taskCount')}" th:errors="*{taskCount}"></span>
-                                </div>
-                                
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Proje Oluştur</button>
-  
-                                 <div class="form-header" >
-                               <p th:if="${error}" style="color: red;" th:text="${error}"></p>
-          						
-        						 <p th:if="${success}" style="color: green;" th:text="${success}"></p>
-                            </div>
-                            </form>
-                                                        <center>            <a th:href="@{/welcome}">
-<button class="au-btn au-btn--block au-btn--green m-b-20" style="background-color:tomato; width:480px;">Anasayfa</button>
- </a></center>
-                            
-                        </div>
+							
+ 								<a th:href="@{/welcome}">
+                              <img th:src="@{/main/images/icon/kayit_error.jpg}" alt="Error">
+                            </a>
+                       
                     </div>
                 </div>
             </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
         </div>
 
     </div>
 
-  
     <!-- Jquery JS-->
     <script th:src="@{/vendor/jquery-3.2.1.min.js}"></script>
     <!-- Bootstrap JS-->
@@ -114,7 +85,6 @@
 
     <!-- Main JS-->
     <script th:src="@{/js/main.js}"></script>
-
 </body>
 
 </html>

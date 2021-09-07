@@ -1,4 +1,4 @@
-package com.project.astron.service;
+	package com.project.astron.service;
 
 
 import java.util.HashSet;
@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Override
     @Transactional(readOnly = true)
     public UserDetails  loadUserByUsername(String username) {
-    	Credential cre = credentialService.findByUsername(username);
+    	Credential cre = credentialService.findForLogin(username);
     	
         if (cre ==null||cre.getUser() == null || cre.getUser().getState()==false) throw new UsernameNotFoundException("User not found");
         

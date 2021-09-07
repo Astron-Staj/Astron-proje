@@ -10,8 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
-
+    <title>DIMGO</title>
+<link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
     <!-- Fontfaces CSS-->
     <link th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
     <link th:href="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
@@ -40,7 +40,7 @@
  
 
         <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
+         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a th:href="@{/welcome}">
                     <img th:src="@{/main/images/icon/logoastron.png}" alt="Cool Admin" />
@@ -51,22 +51,22 @@
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
                             <a class="js-arrow" th:href="@{/dashboard}">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                                <i class="fas fa-tachometer-alt"></i>Anasayfa</a>
                            
                         </li>
                         
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Users</a>
+                                <i class="fas fa-chart-bar"></i>Kullanıcılar</a>
                                  <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/user/manage}">Manage Users</a>
+                                    <a th:href="@{/user/manage}">Kullanıcıları Düzenle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/user/all}">List Users</a>
+                                    <a th:href="@{/user/all}">Kullanıcıları Görüntüle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/user/register}">Add User</a>
+                                    <a th:href="@{/user/register}">Kullanıcı Ekle</a>
                                 </li>
 
                                 
@@ -76,16 +76,16 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Templates</a>
+                                <i class="fas fa-table"></i>Yetki Şablonları</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/template/manageTemplate} ">Manage Templates</a>
+                                    <a th:href="@{/template/manageTemplate} ">Yetki Şablonlarını Düzenle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/template/all}">List Templates</a>
+                                    <a th:href="@{/template/all}">Yetki Şablonlarını Görüntüle</a>
                                 </li>
                                  <li>
-                                    <a th:href="@{/template/create}">Add Template</a>
+                                    <a th:href="@{/template/create}">Yetki Şablonu Ekle</a>
                                 </li>
                          
                             </ul>
@@ -93,47 +93,48 @@
 						 
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Authority</a>
+                                <i class="fas fa-chart-bar"></i>Yetkiler</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/authority/manage}">Manage Auths</a>
+                                    <a th:href="@{/authority/manage}">Yetkileri Düzenle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/authority/all}">List Auths</a>
+                                    <a th:href="@{/authority/all}">Yetkileri Görüntüle</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/authority/newauthority}">Add Auth</a>
+                                    <a th:href="@{/authority/newauthority}">Yetki Ekle</a>
                                 </li>
 						   
                             </ul>
                         </li>
                         
-                        <li class="has-sub">
+                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Clients</a>
+                                <i class="fas fa-chart-bar"></i>Proje Yönetim Sistemleri</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/client/manage}">Manage Clients</a>
+                                    <a th:href="@{/client/manage}">Bağlı Olduğunuz Sistemler</a>
                                 </li>
-                               
+                                
                                 <li>
-                                    <a th:href="@{/client/all}">List All Clients</a>
+                                    <a th:href="@{/client/all}">Tüm Sistemler</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/client/create}">Add Client</a>
+                                    <a th:href="@{/client/create}">Proje Yönetim Sistemi Ekle</a>
                                 </li>
 						   
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        
+                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Projects</a>
+                                <i class="fas fa-copy"></i>Projeler</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a th:href="@{/project/manage}">Your Projects</a>
+                                    <a th:href="@{/project/manage}"> Projeleri Görüntüle</a>
                                 </li>
                                  <li>
-                                    <a th:href="@{/project/manage/all}">All Projects</a>
+                                    <a th:href="@{/project/manage/all}">Tüm Projeleri Görüntüle</a>
                                 </li>
 						   
                             </ul>
@@ -153,43 +154,40 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
+                               
                             </form>
                             <div class="header-button">
-                               
+                                
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                     
+                                        
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#"    th:text="${currentUser.firstName}+'  '  + ${currentUser.lastName}"></a>
+                                            <a class="js-acc-btn" href="#"  th:text="${currentUser.firstName }+ '  '  + ${ currentUser.lastName}"></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"   th:text="${currentUser.firstName}+'  '  + ${currentUser.lastName}" ></a>
+                                                        <a href="#"  th:text="${currentUser.firstName} +'  ' + ${currentUser.lastName}"></a>
                                                     </h5>
-                                                    <span class="email"  th:text="${currentUser.email} "    ></span>
+                                                    <span class="email" th:text="${currentUser.email}"></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a th:href="@{/user/profile}">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                        <i class="zmdi zmdi-account"></i>Profil</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
                                                     <a th:href="@{/user/settings}">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                        <i class="zmdi zmdi-settings"></i>Ayarlar</a>
                                                 </div>
-                                               
+                                                
                                             </div>
                                             <div class="account-dropdown__footer">
                                                 <a th:href="@{/logout}">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                                    <i class="zmdi zmdi-power"></i>Çıkış</a>
                                             </div>
                                         </div>
                                     </div>
@@ -211,15 +209,15 @@
                                 <!-- USER DATA-->
                                 <div class="user-data m-b-30">
                                     <h3 class="title-3 m-b-30">
-                                        <i class="zmdi zmdi-account-calendar"></i>Auths</h3>
+                                        <i class="zmdi zmdi-account-calendar"></i>Yetkiler</h3>
                                     
                                     <div class="table-responsive table-data">
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <td>id</td>
-                                                    <td>name</td>
-                                                    <td>state</td>
+                                                   
+                                                    <td>Yetki Adı</td>
+                                                    <td>Durum</td>
                                                     
                                                 </tr>
                                             </thead>
@@ -227,10 +225,7 @@
                                        
                                                  
                                                     <tr  th:each="auth : ${auths}">
-                                                        <td>
-                                                            <span class="table-data__info"  th:text="${auth.id}" ></span>
-                                                        </td>
-                                                    <td>
+                                                       <td>
                                                         <div class="table-data__info">
                                                             <h6   th:text="${auth.name}" > </h6>
                                                            

@@ -10,8 +10,8 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
-
+    <title>DIMGO</title>
+<link rel="shortcut icon" th:href="@{/main/images/icon/astron.png}" type="image/x-icon">
     <!-- Fontfaces CSS-->
     <link th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
     <link th:href="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
@@ -49,31 +49,39 @@
                         <div class="login-form">
                             <form th:action="@{/template/process_update}" th:object="${templateUpdateDTO}" method="post">
                             <div class="form-group">
-                                    <label>Template ID</label>
-                                     <input type="text" th:field="*{id}" readonly="readonly" />
+                                    
+                                     <input type="hidden" th:field="*{id}"  readonly="readonly" />
                                 </div>
                                 <div class="form-group">
-                                    <label> Template Name</label>
-                                    <input class="au-input au-input--full" type="text" th:field="*{name}" th:placeholder="${template.name}">
+                                    <label> Yetki Şablonu Adı</label>
+                                    <input class="au-input au-input--full" type="text" th:field="*{name}" required="required" th:placeholder="${template.name}">
+                               		  <span style="color: red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                                 </div>
-                                <label for="checkbox3" class="form-check-label ">Templates </label>
+                                <label for="checkbox3" class="form-check-label ">Yetkiler </label>
                                           	 <div th:each="auth: ${authorities} "  class="checkbox">
-                                            <label for="checkbox3" class="form-check-label ">
+                                           
                         
                                                    <input type="checkbox" id="checkbox3" th:field="*{authority}" th:value="${auth.id}"  name="checkbox3"  class="form-check-input"> <p th:text="${auth.name}" ></p> 
                                                             	
-                                       </label>
+                                      
                                        </div>
                                 <div class="form-group">
-                                    <label>Template State</label>
-                                     <input type="checkbox" th:field="*{state}" th:value="true" th:placeholder="${template.state}" />Active
+                                    <label>Durum</label>
+                                     <input type="checkbox" th:field="*{state}" th:value="true" th:placeholder="${template.state}" />Aktif
                                 </div>
                                 
                                
                                 
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Update Template</button>
-                               
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Güncelle</button>
+                               <div class="form-header" >
+                               <p th:if="${error}" style="color: red;" th:text="${error}"></p>
+          						
+        						 <p th:if="${success}" style="color: green;" th:text="${success}"></p>
+                            </div>
                             </form>
+                             <center>            <a th:href="@{/welcome}">
+<button class="au-btn au-btn--block au-btn--green m-b-20" style="background-color:tomato; width:480px;">Anasayfa</button>
+ </a></center>
                     </div>
                 </div>
             </div>

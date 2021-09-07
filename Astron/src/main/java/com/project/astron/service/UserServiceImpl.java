@@ -1,10 +1,12 @@
 package com.project.astron.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.astron.model.Template;
 import com.project.astron.model.User;
 import com.project.astron.repository.UserDataRepository;
 
@@ -18,9 +20,27 @@ public class UserServiceImpl implements IUserService {
 	
 	@Override
 	public List<User> findAll() {
+		List <User> users= userDataRepository.findAll();
+		List<User> activeUsers=new ArrayList<User>();
+		for (User user : users) {
+			if(user.state)
+				activeUsers.add(user);
+		}
+		
+		return activeUsers;
+		
+	}
+
+	
+	
+
+	@Override
+	public List<User> findActiveInactive() {
 		List<User> users=userDataRepository.findAll();
 		return users ;
 	}
+
+
 
 
 	@Override
@@ -31,24 +51,25 @@ public class UserServiceImpl implements IUserService {
 		
 	}
 
-/*
+
 	@Override
-	public void deleteUser(long id) throws Exception{
+	public void deleteUserById(long id) throws Exception{
 		if(isExist(id))
 		userDataRepository.deleteById(id);
 		else
-			throw new Exception("user not found");
+			throw new Exception("Kullanıcı Bulunamadı");
 	}
-*/
+
 
 	@Override
 	public void updateUser(User user)  throws Exception{
 	
 		if(isExist(user.getId())) {
+			
 			userDataRepository.save(user);
 		}
 		else
-			throw new Exception("user_not_found");
+			throw new Exception("Kullanıcı Bulunamadı");
 	
 	}
 
